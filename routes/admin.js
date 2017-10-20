@@ -21,6 +21,7 @@ router.get('/', function (req, res, next) {
         res.render('admin/index', {
             'projects': rows
         });
+        console.log(rows);
     });
 });
 
