@@ -1,0 +1,39 @@
+<a class="button secondary" href="/admin">Go Back</a>
+<h3>Edit Project</h3>
+<!--displays values in the form-->
+<form method="post" action="/admin/edit/{{project.project_id}}" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" name="title" placeholder="Title" value="{{project.project_title}}">
+    </div>
+    <div class="form-group">
+        <label>Service</label>
+        <input type="text" class="form-control" name="service" value="{{project.task}}" placeholder="Service">
+    </div>
+    <div class="form-group">
+        <label>Client</label>
+        <input type="text" class="form-control" name="client" placeholder="Client" value="{{project.hours}}">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" name="description">{{project.description}}</textarea>
+    </div>
+    <div class="form-group">
+        <label>Project Date</label>
+        <input type="date" class="form-control" value="{{project.date}}" name="projectdate">
+    </div>
+    <div class="form-group">
+        <label>Project URL</label>
+        <input type="text" class="form-control" name="url" value="{{project.rate}}" placeholder="URL">
+    </div>
+    <div class="form-group">
+        <label>Image</label>
+        <!--<img class="small-img" src="/images/portfolio/{{project.image}}" />-->
+        <input type="file" class="form-control" name="projectimage" value="{{project.extended_amount}}">
+    </div>
+    <button type="submit" class="button">Submit</button>
+</form>
+
+<td>
+    <a href="/admin/delete/{{project.project_id}}" data-id="{{project.project_id}}" class="button alert delete-project">Delete</a>
+</td>
