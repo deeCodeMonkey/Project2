@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "dee139139",
+    password: "1234",
     database: "timesheet_qb_db"
 });
 
@@ -18,12 +18,32 @@ connection.connect();
 router.get('/', function (req, res, next) {
     connection.query('SELECT * FROM projects ORDER BY project_title', (err, rows, fields) => {
         if (err) throw err;
+        //change date format for presenation
+        rows.forEach((e) => {
+            e.date = new Date(e.date).toISOString().slice(0, 10);
+        }); 
         res.render('admin/index', {
             'projects': rows
         });
-        console.log(rows);
     });
 });
+
+/*
+//display list of records of a client ID
+router.get('/:client_id', function (req, res, next) {
+    connection.query('SELECT * FROM projects WHERE client_id = ? ORDER BY project_title', req.params.client_id,(err, rows, fields) => {
+        if (err) throw err;
+        //change date format for presenation
+        rows.forEach((e) => {
+            e.date = new Date(e.date).toISOString().slice(0, 10);
+        });
+        res.render('admin/index', {
+            'projects': rows
+        });
+    });
+});
+*/
+
 
 router.get('/add', function (req, res, next) {
     res.render('admin/add');
@@ -111,23 +131,23 @@ router.get('/edit/:project_id', function (req, res, next) {
 });
 
 //update with edits to project detail
-router.post('/edit/:project_id', upload.single('projectimage'), function (req, res, next) {
+router.post('/edit/:id', upload.single('projectimage'), function (req, res, next) {
     // Get Form Values
     var project = {
-        title: req.body.title,
+        //names must match to sql db
+        project_title: req.body.title,
         description: req.body.description,
-        service: req.body.service,
-        client: req.body.client,
-        date: req.body.projectdate,
-        url: req.body.url,
-       
+        task: req.body.task,
+        hours: req.body.hours,
+        rate: req.body.rate,
+        notes: req.body.notes
     };
     // Check Image Upload
     if (req.file) {
         project.image = req.file.filename
     }
 
-    var query = connection.query('UPDATE projects SET ? WHERE id = ' + req.params.id, project, function (err, result) {
+    var query = connection.query('UPDATE projects SET ? WHERE project_id = ' + req.params.id, project, function (err, result) {
         if (err) {
             console.log('Error: ' + err);
         } else {

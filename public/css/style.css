@@ -1,12 +1,22 @@
 .padding{padding:10px;}
 .small-img{width:80px;}
+
+
+
+
 .red {
     color: red;
+    background-color: red;
 }
 
 
+.fi-page-edit {
+    font-size: 1.2rem;
+} 
+
+
 .table-expand {
-    margin-top: 5rem;
+    margin-top: 0rem;
 }
 
     .table-expand td {

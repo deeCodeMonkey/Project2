@@ -8,6 +8,7 @@ var flash = require('connect-flash');
 var multer = require('multer');
 //default destination directory for multer
 var upload = multer({ dest: './public/images/portfolio' });
+var sass = require('node-sass');
 
 var app = express();
 

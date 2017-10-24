@@ -3,7 +3,8 @@
 <html>
 <head>
     <title>MyProject</title>
- <!--refernce css files here -->
+ <!--refernce css files here -->    
+    <link rel="stylesheet" href="/css/foundation-icons/foundation-icons.css" />
     <link rel="stylesheet" href="/css/foundation.css" />
     <link rel="stylesheet" href="/css/style.css" />
 
@@ -15,7 +16,7 @@
             <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
                 <div class="row column">
                     <br>
-                    <img class="thumbnail" src="/images/avatar.png">
+                    <img class="thumbnail" src="/images/company.jpg">
                     <h5>Mike Mikerson</h5>
                     <p>Duis aliquet egestas purus in blandit. Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed molestie augue sit amet leo.</p>
                 </div>
@@ -30,26 +31,28 @@
                         <span class="title-bar-title">Mike Mikerson</span>
                     </div>
                 </div>
-                <div class="callout primary">
+                <div class="callout primary banner">
                     <div class="row column">
-                        <h1>Hello! This is the portfolio of a very witty person.</h1>
+                        <h3>Hello! This is the portfolio of a very witty person.</h3>
                         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla.</p>
                     </div>
+
                 </div>
                 <div class="row small-up-2 medium-up-3 large-up-4">
-                   
- <!--content in handlebars files will populate here based on routing -->
-                    {{{body}}}
+                        <!--content in handlebars files will populate here based on routing -->
+                        {{{body}}}
                 </div>
+
 
                 <hr>
 
-                <a href="/admin" class="padding">Admin Area</a>
+                <!--<a href="/admin" class="padding">Admin Area</a>-->
 
             </div>
         </div>
     </div>
     <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="js/bootstrap.js"></script>
     <script src="/js/main.js"></script>
 </body>
 </html>
