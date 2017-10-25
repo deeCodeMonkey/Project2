@@ -7,8 +7,7 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var multer = require('multer');
 //default destination directory for multer
-var upload = multer({ dest: './public/images/portfolio' });
-var sass = require('node-sass');
+var upload = multer({ dest: './public/images/logos' });
 
 var app = express();
 
@@ -55,9 +54,11 @@ app.use(expressValidator({
 // Route Files
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
+var company = require('./routes/company');
 app.use('/', routes);
 app.use('/admin', admin);
+app.use('/company', company);
 
 app.listen(8080, function(){
-	console.log('Server started');
+	console.log('Server started 8080');
 });

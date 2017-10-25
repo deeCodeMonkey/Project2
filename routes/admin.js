@@ -14,37 +14,6 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-//display list of records
-router.get('/', function (req, res, next) {
-    connection.query('SELECT * FROM projects ORDER BY project_title', (err, rows, fields) => {
-        if (err) throw err;
-        //change date format for presenation
-        rows.forEach((e) => {
-            e.date = new Date(e.date).toISOString().slice(0, 10);
-        }); 
-        res.render('admin/index', {
-            'projects': rows
-        });
-    });
-});
-
-/*
-//display list of records of a client ID
-router.get('/:client_id', function (req, res, next) {
-    connection.query('SELECT * FROM projects WHERE client_id = ? ORDER BY project_title', req.params.client_id,(err, rows, fields) => {
-        if (err) throw err;
-        //change date format for presenation
-        rows.forEach((e) => {
-            e.date = new Date(e.date).toISOString().slice(0, 10);
-        });
-        res.render('admin/index', {
-            'projects': rows
-        });
-    });
-});
-*/
-
-
 router.get('/add', function (req, res, next) {
     res.render('admin/add');
 });
@@ -80,39 +49,9 @@ router.post('/add', upload.single('projectimage'), function (req, res, next) {
             console.log(project.date);
         }
     });
-
-    /*
-    //validation rules
-    req.checkBody('project_title', 'Title field is required').notEmpty();
-    req.checkBody('task', 'Task field is required').notEmpty();
-
-    var errors = req.validationErrors();
-    if (errors) {
-        ///////////////////////////need to update for validation
-        res.render('admin/add', {
-            errors: errors[0].msg,
-            title: req.body.title,
-            description: req.body.description,
-            service: req.body.service,
-            client: req.body.client,
-            url: req.body.url,
-            date: req.body.projectdate
-        });
-    } else {
-        var query = connection.query('INSERT INTO projects SET ?', project, function (err, result) {
-            if (err) {
-                console.log('Error: ' + err);
-            } else {
-                console.log('Success: ' + result);
-            }
-        });
-    //req.flash('success_msg', 'Project Added');
-        res.redirect('/admin');
-    }
-    */
-    res.redirect('/admin');
-    
+    res.redirect('/admin');   
 });
+
 
 //show form with values for editing
 router.get('/edit/:project_id', function (req, res, next) {
@@ -129,6 +68,7 @@ router.get('/edit/:project_id', function (req, res, next) {
         });
     });
 });
+
 
 //update with edits to project detail
 router.post('/edit/:id', upload.single('projectimage'), function (req, res, next) {
@@ -165,6 +105,66 @@ router.delete('/delete/:idOfrecord', (req, res) => {
         console.log('Deleted' + result.affectedRows + 'rows.');
     });
     res.sendStatus(200);
+});
+
+
+
+//display list of records of a client ID
+router.get('/:client_id', function (req, res, next) {
+    connection.query('SELECT * FROM projects WHERE client_id = ? ORDER BY project_title', req.params.client_id,(err, rows, fields) => {
+        if (err) throw err;
+        //change date format for presenation
+        rows.forEach((e) => {
+            e.date = new Date(e.date).toISOString().slice(0, 10);
+        });
+        res.render('admin/index', {
+            'client_id': req.params.client_id,
+            'projects': rows
+        });
+    });
+});
+
+
+//route to add for a Client ID
+router.get('/add/:client_id', function (req, res, next) {
+    res.render('admin/add', {
+        'client_id': req.params.client_id,
+        'date': new Date().toISOString().slice(0, 10)
+    });
+});
+
+//enter details for new task for a Client ID
+router.post('/add/:client_id', upload.single('attachment'), function (req, res, next) {
+
+    // Check Image Upload
+    if (req.file) {
+        var projectAttachment = req.file.attachment
+    } else {
+        var projectAttachment = 'No Attachment';
+    }
+
+    var project = {
+        project_title: req.body.title,
+        date: req.body.date,
+        task: req.body.task,
+        description: req.body.description,
+        hours: req.body.hours,
+        rate: req.body.rate,
+        notes: req.body.notes,
+        client_id: req.params.client_id,
+        attachments: projectAttachment
+    };
+
+    var query = connection.query('INSERT INTO projects SET ?', project, function (err, result) {
+        if (err) {
+            console.log('Error: ' + err);
+            console.log(project.date);
+        } else {
+            console.log('Success: ' + result);
+            console.log(project.date);
+        }
+    });
+    res.redirect('/admin/' + req.params.client_id);
 });
 
 module.exports = router;

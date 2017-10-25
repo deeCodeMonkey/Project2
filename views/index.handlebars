@@ -1,12 +1,23 @@
 <!--If there are projects, then loop through them-->
-{{#if projects}}
-    {{#each projects}}
+
+<a href="/company/add" class="button success hollow float-left"><i class="fi-plus"></i> 
+Add Client</a>
+
+{{#if clients}}
+    {{#each clients}}
 <div class="column">
-    <img class="thumbnail" src="/images/portfolio/{{image}}">
-    <h5 class="text-center">{{title}}</h5>
-    <p class="text-center show"><a href="/details/{{id}}">Show More</a></p>
+    <img class="thumbnail" src="/images/logos/{{logo}}">
+    <h5 class="text-center" style="color: black;">{{client_id}}</h5>
+    <h5 class="text-center" style="color: black;">{{company_name}}</h5>
+    <p class="text-center show"><a href="/admin/{{client_id}}">Timesheet</a></p>
+    <div class="text-center">
+        <a href="/company/delete/{{client_id}}" data-id="{{client_id}}" class="fi-x delete-icon"></a>
+        <a href="/company/edit/{{client_id}}" data-id="{{client_id}}" class="fi-page-edit edit-icon"></a>
+    </div>
 </div>
     {{/each}}
 {{else}}
     <p>No Projects.</p>
 {{/if}}
+
+

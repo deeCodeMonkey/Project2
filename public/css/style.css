@@ -3,15 +3,30 @@
 
 
 
+.clientImage {
+    width: 200px;
+    height: 200px;
+}
+
+
+.info {
+    margin-left: 10px;
+}
 
 .red {
     color: red;
     background-color: red;
 }
 
+.fi-x {
+    font-size: 1.0rem;
+    color: red;
+}
 
 .fi-page-edit {
     font-size: 1.2rem;
+    color: #3adb76;
+    margin-left: 10px;
 } 
 
 

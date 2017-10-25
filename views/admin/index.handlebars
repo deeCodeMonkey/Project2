@@ -1,11 +1,12 @@
 <!--/admin view is this index file-->
-<a href="/admin/add" class="button success hollow">Add Task</a>
-<a href="/" class="button info float-right hollow">Client List</a>
+
     {{#if projects}}
 <div>
+    <a href="/admin/add/{{client_id}}" class="button success hollow"><i class="fi-plus"></i></a>
     <table class="table-expand">
         <thead>
             <tr class="table-expand-row">
+                <th width="150">Client ID</th>
                 <th width="150">Project</th>
                 <th width="125">Date</th>
                 <th width="125">Task</th>
@@ -13,12 +14,13 @@
                 <th class="text-right" width="150">Hours</th>
                 <th class="text-right" width="150">Hrly Rate</th>
                 <th class="text-right" width="150">Extended Amount</th>
-                <th width="10" class="fi-clipboard-notes"></th>
+                <th width="10" class="fi-list-bullet"></th>
             </tr>
         </thead>
         {{#each projects}}
         <tbody>
             <tr class="table-expand-row" data-open-details>
+                <td>{{client_id}}</td>
                 <td>{{project_title}}</td>
                 <td>{{date}}</td>
                 <td>{{task}}</td>
@@ -35,15 +37,16 @@
                 </td>
                 <td>
                     <a href="/admin/edit/{{project_id}}" class="fi-page-edit"></a>
-                </td>
+                </td>    
             </tr>
-
         </tbody>
-
         {{/each}}
+        
     </table>
     {{else}}
-    No Projects
+    <a class="button secondary" href="/">Go Back</a>
+    <h4 style="color: black">No projects yet entered for this Client.</h4>
+    <a href="/admin/add/{{client_id}}" class="button success hollow"><i class="fi-plus"></i></a>
     {{/if}}
 </div>
 

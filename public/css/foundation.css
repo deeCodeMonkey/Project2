@@ -2014,6 +2014,7 @@ select {
     .callout.primary {
         background-color: #002647;
         color: ghostwhite;
+        height: 180px;
     }
   .callout.secondary {
     background-color: #ebebeb; }
