@@ -1,14 +1,15 @@
 $(document).ready(function () {
     $('.delete-project').click(function () {
-        var id = $(this).data('id');
-        console.log('this is from jquery' + id);
-        var url = '/admin/delete/' + id;
+        var project_id = $(this).data('id');
+        var client_id = $(this).data('name');
+        console.log('this is from jquery' + project_id);
+        var url = '/admin/delete/' + project_id;
         if (confirm('Delete Project')) {
             $.ajax({
                 url: url,
                 type: 'DELETE',
                 success: function (result) {
-                    window.location = '/admin';
+                    window.location = '/admin/' + client_id;
                 }, error: function (err) {
                     console.log(err);
                 }

@@ -2,18 +2,11 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var upload = multer({ dest: './public/images/portfolio' });
-var mysql = require('mysql');
+var connection = require('../model/connection.js');
 
-var connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "1234",
-    database: "timesheet_qb_db"
-});
 
-connection.connect();
 
+/*
 router.get('/add', function (req, res, next) {
     res.render('admin/add');
 });
@@ -51,7 +44,7 @@ router.post('/add', upload.single('projectimage'), function (req, res, next) {
     });
     res.redirect('/admin');   
 });
-
+*/
 
 //show form with values for editing
 router.get('/edit/:project_id', function (req, res, next) {
@@ -80,7 +73,8 @@ router.post('/edit/:id', upload.single('projectimage'), function (req, res, next
         task: req.body.task,
         hours: req.body.hours,
         rate: req.body.rate,
-        notes: req.body.notes
+        notes: req.body.notes,
+        client_id: req.body.client_id
     };
     // Check Image Upload
     if (req.file) {
@@ -95,7 +89,7 @@ router.post('/edit/:id', upload.single('projectimage'), function (req, res, next
         }
     });
 
-    res.redirect('/admin');
+    res.redirect('/admin/' + project.client_id);
 });
 
 //delete record from edit window
@@ -107,9 +101,7 @@ router.delete('/delete/:idOfrecord', (req, res) => {
     res.sendStatus(200);
 });
 
-
-
-//display list of records of a client ID
+//display list of tasks of a client ID
 router.get('/:client_id', function (req, res, next) {
     connection.query('SELECT * FROM projects WHERE client_id = ? ORDER BY project_title', req.params.client_id,(err, rows, fields) => {
         if (err) throw err;
@@ -125,7 +117,7 @@ router.get('/:client_id', function (req, res, next) {
 });
 
 
-//route to add for a Client ID
+//route to add task for a Client ID
 router.get('/add/:client_id', function (req, res, next) {
     res.render('admin/add', {
         'client_id': req.params.client_id,
@@ -133,7 +125,7 @@ router.get('/add/:client_id', function (req, res, next) {
     });
 });
 
-//enter details for new task for a Client ID
+//enter details for new task add for a Client ID
 router.post('/add/:client_id', upload.single('attachment'), function (req, res, next) {
 
     // Check Image Upload

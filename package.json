@@ -17,6 +17,7 @@
     "express-validator": "^4.2.1",
     "moment": "*",
     "multer": "*",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "phantom-render-stream": "^2.2.0"
   }
 }

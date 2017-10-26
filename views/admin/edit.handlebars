@@ -3,8 +3,11 @@
 <!--displays values in the form-->
 <form method="post" action="/admin/edit/{{project.project_id}}" enctype="multipart/form-data">
     <div class="form-group">
-        <label>Project Title</label>
-        <input type="text" class="form-control" name="title" placeholder="Title" value="{{project.project_title}}">
+        <input type="hidden" class="form-control" name="client_id" value="{{project.client_id}}">
+    </div>
+    <div class="form-group">
+    <label>Project Title</label>
+    <input type="text" class="form-control" name="title" placeholder="Title" value="{{project.project_title}}">
     </div>
     <div class="form-group">
         <label>Date</label>
@@ -39,5 +42,5 @@
 </form>
 
 <td>
-    <a href="/admin/delete/{{project.project_id}}" data-id="{{project.project_id}}" class="button alert delete-project">Delete</a>
+    <a href="/admin/delete/{{project.project_id}}" data-id="{{project.project_id}}" data-name="{{project.client_id}}" class="button alert delete-project">Delete</a>
 </td>

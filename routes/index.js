@@ -1,18 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var connection = require('../model/connection.js');
 
-
-var connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "1234",
-    database: "timesheet_qb_db"
-});
-
-connection.connect();
-
+//show clients
 router.get('/', function(req, res, next) {
     connection.query('SELECT * FROM clients', (err, rows, fields) => {
         if (err) throw err;
@@ -22,7 +12,8 @@ router.get('/', function(req, res, next) {
     });
 });
 
-//display list of records
+/*
+//display list of all task records
 router.get('/all', function (req, res, next) {
     connection.query('SELECT * FROM projects ORDER BY project_title', (err, rows, fields) => {
         if (err) throw err;
@@ -35,6 +26,7 @@ router.get('/all', function (req, res, next) {
         });
     });
 });
+*/
 
 
 

@@ -8,6 +8,11 @@ var flash = require('connect-flash');
 var multer = require('multer');
 //default destination directory for multer
 var upload = multer({ dest: './public/images/logos' });
+var HTMLToPDF = require('html5-to-pdf');
+var phantom = require('phantom-render-stream');
+var fs = require('fs');
+
+var render = phantom();
 
 var app = express();
 
@@ -58,6 +63,21 @@ var company = require('./routes/company');
 app.use('/', routes);
 app.use('/admin', admin);
 app.use('/company', company);
+
+
+//create pdf from route
+app.get('/test', (req, res) => {
+    var destination = fs.createWriteStream('out.pdf');
+    destination.addListener('finish', () => {
+        res.sendFile('./out.pdf');
+    });
+    render('http://localhost:8080/invoice/100', {
+        format: 'pdf'
+    }).pipe(destination);
+    
+
+});
+
 
 app.listen(8080, function(){
 	console.log('Server started 8080');

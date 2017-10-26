@@ -2,17 +2,7 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var upload = multer({ dest: './public/images/logos' });
-var mysql = require('mysql');
-
-var connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "1234",
-    database: "timesheet_qb_db"
-});
-
-connection.connect();
+var connection = require('../model/connection.js');
 
 //add new client company
 router.get('/add', function (req, res, next) {
