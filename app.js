@@ -8,7 +8,6 @@ var flash = require('connect-flash');
 var multer = require('multer');
 //default destination directory for multer
 var upload = multer({ dest: './public/images/logos' });
-var HTMLToPDF = require('html5-to-pdf');
 var phantom = require('phantom-render-stream');
 var fs = require('fs');
 
@@ -77,6 +76,13 @@ app.get('/test', (req, res) => {
     
 
 });
+
+app.get('/invoice', (req, res) => {
+    res.render('invoice/invoice');
+
+
+});
+
 
 
 app.listen(8080, function(){

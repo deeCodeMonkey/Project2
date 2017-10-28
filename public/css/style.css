@@ -1,13 +1,9 @@
 .padding{padding:10px;}
 .small-img{width:80px;}
 
-
-
-.logo {
-    width: 250px;
-    height: 200px;
+body {
+    font-family: 'Open Sans', sans-serif;
 }
-
 
 .info {
     margin-left: 10px;

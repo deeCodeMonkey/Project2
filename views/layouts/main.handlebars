@@ -4,10 +4,12 @@
 <head>
     <title>MyProject</title>
  <!--refernce css files here -->    
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/css/foundation-icons/foundation-icons.css" />
     <link rel="stylesheet" href="/css/foundation.css" />
     <link rel="stylesheet" href="/css/style.css" />
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
 </head>
 <body>
     <div class="off-canvas-wrapper">
@@ -16,28 +18,46 @@
             <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
                 <div class="row column">
                     <br>
-                    <img class="thumbnail clientImage" src="/images/company.png">
-                    <h5>Mike Mikerson</h5>
-                    <p>Duis aliquet egestas purus in blandit. Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed molestie augue sit amet leo.</p>
-                </div>
-                <a href="/" class="button info hollow">Client List</a>
-                <!--<a href="/all" class="button info hollow">Display All Projects</a>-->
-   
-            </div>
-            <a href="/admin">Admin Area</a>
+                    <img class="thumbnail clientImage" src="/images/design3.jpg" style="border: hidden;">
 
-            <div class="off-canvas-content" data-off-canvas-content>
+                    <a href="/company/add" class="button primary hollow float-left" style="margin-left: 5px; margin-right: 30px; font-family: 'Raleway', sans-serif;">
+                        <i class="fi-plus"></i>
+                        Client
+                    </a> 
+                    <!--<a href="/all" class="button info hollow">Display All Projects</a>-->
+                    
+                    <h5 style="font-family: 'Raleway', sans-serif; font-weight: bold;">Time'nDinero</h5>
+                    </div>
+                    <div class="row column" style="color: ghostwhite; font-family: 'Raleway', sans-serif;">
+                        <p>Application for tracking hours for projects for client. Ability to generate and email invoices to clients.</p>
+                        <p style="font-family: 'Raleway', sans-serif;">Geared towards the service and consultancy industry, including freelancers. Get away from excel spreadsheet snad Save Time and therefore, Money when using this app! </p>
+                        <p style="font-family: 'Raleway', sans-serif;"><em>Quickbooks integration in next release.</em></p>
+                    </div> 
+                <br />
+                <br />
+                <br />
+                               
+            </div>
+           
+
+            <div class="off-canvas-content" data-off-canvas-content style="background-color: #DBDBDB">
                 <div class="title-bar hide-for-large">
                     <div class="title-bar-left">
                         <button class="menu-icon" type="button" data-open="my-info"></button>
-                        <span class="title-bar-title">Mike Mikerson</span>
+                        <span class="title-bar-title">Time'nDinero</span>
                     </div>
                 </div>
-                <div class="callout primary banner">
-                    <div class="row column">
-                        <h3>Client Timesheet</h3>
-                        <p class="lead">Enter billable time and project details for client billing, integrated with Quickbooks accounting system for direct invoicing.</p>
-                        
+                <div class="callout primary banner" style="background-color:#DBDBDB;">
+
+                    <div class="row column">                     
+            <!--bread crumbs-->            
+                        <ul class="breadcrumbs">
+                            <li style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="/">Client Profile</a></li>
+                            <li style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="/">All Clients</a></li>
+                            <li class="unavailable" style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="/all">All Projects</a></li>
+                            <li class="current" style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="#">Invoiced List</a></li>
+                            <li class="float-right" style="color: darkslategray">Time'nDinero</li>
+                        </ul>
                         
                     </div>
 
@@ -55,8 +75,12 @@
             </div>
         </div>
     </div>
-    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    
     <script src="/js/main.js"></script>
 </body>
 </html>
+
+

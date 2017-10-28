@@ -1,5 +1,5 @@
-<a class="button secondary" href="/admin/{{client_id}}">Go Back</a>
-
+<a href="/admin/{{client_id}}"><i class="fa fa-chevron-left icon pull-left" style="color: #2199e8"> Go Back</i></a>
+<br />
 <h1>Add Task For {{client_id}}</h1>
 <h6>{{errors}}</h6>
 
@@ -33,9 +33,6 @@
         <label>Notes</label>
         <textarea class="form-control" name="notes" placeholder="Notes">{{notes}}</textarea>
     </div>
-    <div class="form-group">
-        <label>Attachment</label>
-        <input type="file" class="form-control" name="attachment">
-    </div>
-    <button type="submit" class="button">Submit</button>
+
+    <button type="submit" class="button hollow"><strong>Submit</strong></button>
 </form>

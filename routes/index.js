@@ -4,7 +4,7 @@ var connection = require('../model/connection.js');
 
 //show clients
 router.get('/', function(req, res, next) {
-    connection.query('SELECT * FROM clients', (err, rows, fields) => {
+    connection.query('SELECT * FROM clients ORDER BY client_id DESC', (err, rows, fields) => {
         if (err) throw err;
         res.render('index', {
             'clients': rows
@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-/*
+
 //display list of all task records
 router.get('/all', function (req, res, next) {
     connection.query('SELECT * FROM projects ORDER BY project_title', (err, rows, fields) => {
@@ -26,8 +26,19 @@ router.get('/all', function (req, res, next) {
         });
     });
 });
-*/
 
+
+//generate and display invoice for client
+router.get('/invoice/:id', function (req, res, next) {
+    connection.query('SELECT * FROM projects WHERE client_id =' + req.params.id, (err, rows, fields) => {
+        if (err) throw err;
+        res.render('invoice/invoice', {
+            'client_id': req.params.id,
+            'projects': rows
+        });
+        console.log(rows);
+    });
+});
 
 
 

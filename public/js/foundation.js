@@ -34,7 +34,8 @@
       // Examples: Foundation.Reveal, Foundation.OffCanvas
       var className = name || functionName(plugin);
       // Object key to use when storing the plugin, also used to create the identifying data attribute for the plugin
-      // Examples: data-reveal, data-off-canvas
+      // Examples: data-reveal, data-
+
       var attrName = hyphenate(className);
 
       // Add to the Foundation object and the plugins list (for reflowing)
