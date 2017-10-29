@@ -3,7 +3,10 @@
 <html id="test">
 <head>
     <title>MyProject</title>
- <!--refernce css files here -->    
+    <!--refernce css files here -->
+    <link rel="stylesheet" href="/cssmenu/styles.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="/cssmenu/script.js"></script>
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/css/foundation-icons/foundation-icons.css" />
@@ -23,62 +26,87 @@
                     <a href="/company/add" class="button primary hollow float-left" style="margin-left: 5px; margin-right: 30px; font-family: 'Raleway', sans-serif;">
                         <i class="fi-plus"></i>
                         Client
-                    </a> 
+                    </a>
                     <!--<a href="/all" class="button info hollow">Display All Projects</a>-->
-                    
+
                     <h5 style="font-family: 'Raleway', sans-serif; font-weight: bold;">Time'nDinero</h5>
-                    </div>
-                    <div class="row column" style="color: ghostwhite; font-family: 'Raleway', sans-serif;">
-                        <p>Application for tracking hours for projects for client. Ability to generate and email invoices to clients.</p>
-                        <p style="font-family: 'Raleway', sans-serif;">Geared towards the service and consultancy industry, including freelancers. Get away from excel spreadsheet snad Save Time and therefore, Money when using this app! </p>
-                        <p style="font-family: 'Raleway', sans-serif;"><em>Quickbooks integration in next release.</em></p>
-                    </div> 
+                </div>
+                <div class="row column" style="color: ghostwhite; font-family: 'Raleway', sans-serif;">
+                    <p>Application for tracking hours for projects for client. Ability to generate and email invoices to clients.</p>
+                    <p style="font-family: 'Raleway', sans-serif;">Geared towards the service and consultancy industry, including freelancers. Get away from excel spreadsheet snad Save Time and therefore, Money when using this app! </p>
+                    <p style="font-family: 'Raleway', sans-serif;"><em>Quickbooks integration in next release.</em></p>
+                </div>
                 <br />
                 <br />
                 <br />
-                               
+
             </div>
-           
+
 
             <div class="off-canvas-content" data-off-canvas-content style="background-color: #DBDBDB">
-                <div class="title-bar hide-for-large">
-                    <div class="title-bar-left">
-                        <button class="menu-icon" type="button" data-open="my-info"></button>
-                        <span class="title-bar-title">Time'nDinero</span>
-                    </div>
-                </div>
-                <div class="callout primary banner" style="background-color:#DBDBDB;">
+                <!--<div class="title-bar hide-for-large">
+            <div class="title-bar-left">
+                <button class="menu-icon" type="button" data-open="my-info"></button>
+                <span class="title-bar-title">Time'nDinero</span>
+            </div>
+        </div>
+            -->
+                <!-- <div class="callout primary banner" style="background-color:#DBDBDB;">
+            -->
+                <!--</h1> <div class="row column">   -->
 
-                    <div class="row column">                     
-            <!--bread crumbs-->            
-                        <ul class="breadcrumbs">
-                            <li style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="/">Client Profile</a></li>
-                            <li style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="/">All Clients</a></li>
-                            <li class="unavailable" style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="/all">All Projects</a></li>
-                            <li class="current" style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="#">Invoiced List</a></li>
-                            <li class="float-right" style="color: darkslategray">Time'nDinero</li>
-                        </ul>
-                        
-                    </div>
-
+                <div id='cssmenu'>
+                    <ul>
+                        <li><a href='/'>All Clients</a></li>
+                        <li><a href='/all'>All Projects</a></li>
+                        <li><a href='#'>Client Profile</a></li>
+                        <li><a href='#'>Help</a></li>
+                        <li class="col-md-3 col-md-offset-3 float-right">
+                            <div style="padding-top: 10px; margin-right: 40px; background-color: #2c3e50;">
+                                <form action="" class="search-form">
+                                    <div class="form-group has-feedback">
+                                        <label for="search" class="sr-only">Search</label>
+                                        <input type="text" class="form-control" name="search" id="search" placeholder="search client">
+                                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="row small-up-2 medium-up-3 large-up-4">
+
+
+
+
+                <!--bread crumbs-->
+                <!--
+        <ul class="breadcrumbs">
+            <li style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="/">Client Profile</a></li>
+            <li style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="/">All Clients</a></li>
+            <li class="unavailable" style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="/all">All Projects</a></li>
+            <li class="current" style="font-family: 'Raleway', sans-serif; font-weight: bold;"><a href="#">Invoiced List</a></li>
+            <li class="float-right" style="color: darkslategray">Time'nDinero</li>
+        </ul>
+        -->
+                <!--  </div> -->
+                <!-- </div>
+        -->
+
+                <div class="row">
+                    <div class="row small-up-2 medium-up-3 large-up-4" style="padding-top: 20px;">
                         <!--content in handlebars files will populate here based on routing -->
                         {{{body}}}
+                    </div>
+
+                    <hr>
                 </div>
-
-
-                <hr>
-
                 <!--<a href="/admin" class="padding">Admin Area</a>-->
 
             </div>
         </div>
     </div>
-
     <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
-    
     <script src="/js/main.js"></script>
 </body>
 </html>

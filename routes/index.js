@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var connection = require('../model/connection.js');
 
-//show clients
+//show all clients
 router.get('/', function(req, res, next) {
     connection.query('SELECT * FROM clients ORDER BY client_id DESC', (err, rows, fields) => {
         if (err) throw err;
@@ -26,21 +26,6 @@ router.get('/all', function (req, res, next) {
         });
     });
 });
-
-
-//generate and display invoice for client
-router.get('/invoice/:id', function (req, res, next) {
-    connection.query('SELECT * FROM projects WHERE client_id =' + req.params.id, (err, rows, fields) => {
-        if (err) throw err;
-        res.render('invoice/invoice', {
-            'client_id': req.params.id,
-            'projects': rows
-        });
-        console.log(rows);
-    });
-});
-
-
 
 
 

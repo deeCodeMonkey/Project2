@@ -59,9 +59,11 @@ app.use(expressValidator({
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
 var company = require('./routes/company');
+var invoice = require('./routes/invoice');
 app.use('/', routes);
 app.use('/admin', admin);
 app.use('/company', company);
+app.use('/invoice', invoice);
 
 
 //create pdf from route
