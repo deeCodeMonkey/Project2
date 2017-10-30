@@ -22,6 +22,10 @@ router.post('/add', upload.single('logo'), function (req, res, next) {
     var client = {
         client_id: req.body.client_id,
         company_name: req.body.company_name,
+        contact_person: req.body.contact_person,
+        email_address: req.body.email_address,
+        phone: req.body.phone,
+        mailing_address: req.body.mailing_address,
         logo: logo
     };
 
@@ -46,6 +50,17 @@ router.delete('/delete/:idOfrecord', (req, res) => {
     res.sendStatus(200);
 });
 
+
+//display company profile 
+router.get('/profile/:id', function (req, res, next) {
+    connection.query('SELECT * FROM clients WHERE client_id =' + req.params.id, (err, rows, fields) => {
+        if (err) throw err;
+        res.render('company/profile', {
+            'clients': rows[0]
+        });
+        console.log(rows[0]);
+    });
+});
 
 
 

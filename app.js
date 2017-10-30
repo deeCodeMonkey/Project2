@@ -86,6 +86,12 @@ app.get('/invoice', (req, res) => {
 });
 
 
+app.get('/profile', (req, res) => {
+    res.render('company/profile');
+
+
+});
+
 
 app.listen(8080, function(){
 	console.log('Server started 8080');

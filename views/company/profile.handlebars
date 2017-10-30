@@ -1,0 +1,57 @@
+{{#if clients}}
+
+<div class="card card-tabs float-center" style="color: black; width: 600px; height: 1000px; font-family: 'Raleway', sans-serif;">
+
+    <div class="card-divider">
+        <h5 class="float-left"><strong>{{clients.company_name}}</strong></h5>
+        <ul class="tabs menu align-right">
+            <!-- note: these need to be in reverse order because of the align-right setting in .menu -->
+            <li class="tabs-title">              
+                <a href="/company/delete/{{clients.client_id}}" data-id="{{clients.client_id}}" class="delete-icon">
+                    <i class="fa fa-trash"></i> Delete Client
+                </a>
+            </li>
+            <li class="tabs-title">
+                <a href="#panel2c">
+                    <i class="fa fa-edit"></i>
+                    Edit Client
+                </a>
+            </li>
+            <li class="tabs-title">
+                <a href="/admin/{{clients.client_id}}" style="color: #2199e8;">
+                    <i class="fa fa-list"></i>
+                    Timesheet
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tabs-content">
+
+        <div class="tabs-panel is-active" style="padding-left: 10px;">
+            <img src="/images/logos/{{clients.logo}}" style="width: 500px; height: 100%;">
+            <div class="card-section" style="padding-top: 20px;">
+                <h4>Billing Information:</h4>
+                <p><strong>Account No:</strong> {{clients.client_id}}</p>
+                <p><strong>Contact Person:</strong> {{clients.contact_person}}</p>
+                <p><strong>Email Address:</strong> {{clients.email_address}}</p>
+                <p><strong>Phone:</strong> {{clients.phone}}</p>
+                <p><strong>Mailing Address:</strong> {{clients.mailing_address}}</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{{else}}
+
+<h1>No Client.</h1>
+
+{{/if}}
+
+
+
+
+
+

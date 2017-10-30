@@ -25,7 +25,7 @@ $('[data-open-details]').click(function (e) {
     $(this).toggleClass('is-active');
 });
 
-
+//delete company
 $(document).ready(function () {
     $('.delete-icon').click(function () {
         var id = $(this).data('id');
@@ -45,4 +45,4 @@ $(document).ready(function () {
     });
 });
 
-
+//search bar
