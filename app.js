@@ -8,9 +8,9 @@ var flash = require('connect-flash');
 var multer = require('multer');
 //default destination directory for multer
 var upload = multer({ dest: './public/images/logos' });
+
 var phantom = require('phantom-render-stream');
 var fs = require('fs');
-
 var render = phantom();
 
 var app = express();
@@ -78,6 +78,9 @@ app.get('/test', (req, res) => {
     
 });
 
+app.get('/test1', function (req, res) {
+    res.render('invoice', { layout: false });
+});
 
 
 

@@ -1,6 +1,8 @@
-<a class="button secondary" href="/admin/{{project.client_id}}">Go Back</a>
+<a href="/admin/{{project.client_id}}"><i class="fa fa-chevron-left icon pull-left" style="color: #2199e8; font-size: 24px;"></i></a>
+<br />
+<br />
 
-<h3>Edit Project</h3>
+<h3 style="color: darkslategrey">Edit Project</h3>
 <!--displays values in the form-->
 <form method="post" action="/admin/edit/{{project.project_id}}" enctype="multipart/form-data">
     <div class="form-group">
@@ -34,10 +36,9 @@
         <label>Notes</label>
         <textarea class="form-control" name="notes">{{project.notes}}</textarea>
     </div>
-
-    <button type="submit" class="button">Submit</button>
+    <button type="submit" class="button hollow"><strong>Submit Edit</strong></button>
 </form>
 
 <td>
-    <a href="/admin/delete/{{project.project_id}}" data-id="{{project.project_id}}" data-name="{{project.client_id}}" class="button alert delete-project">Delete</a>
+    <a href="/admin/delete/{{project.project_id}}" data-id="{{project.project_id}}" data-name="{{project.client_id}}" class="button alert hollow delete-project">Delete</a>
 </td>

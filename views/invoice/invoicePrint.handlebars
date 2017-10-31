@@ -1,45 +1,35 @@
-﻿
+﻿{{> header}}
 <div class="container" style="color: black">
     <div class="row">
-        <div class="col-xs-12">
+        <div class=" ">
 
             <div class="row">
-       
-                <a href="/admin/{{client_id}}" ><i class="fa fa-chevron-left icon pull-left" style="color: #2199e8; font-size: 24px;"></i></a>  
-                <div class="col-xs-12 col-md-3 col-lg-3 pull-right">
-                    <i class="fa fa-envelope-o icon pull-right" style="color: #2199e8; font-size: 26px;"></i>
-                    <i class="fa fa-mail-forward icon pull-right" style="color: #2199e8; font-size: 26px;"></i>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-
-                <div class="col-xs-12 col-md-3 col-lg-3 pull-left">
+                <div class="col-md-6 col-sx-6">
                     <div class="panel panel-default height">
                         <div class="panel-heading">Bill To</div>
-                        <div class="panel-body">                          
+                        <div class="panel-body">
                             <strong>{{company_name}}</strong><br>
                             Attn: {{contact_person}}<br>
                             {{mailing_address}}<br>
                             {{phone}}<br>
                             {{email_address}}<br />
-                         
+
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-3 col-lg-3">
+                <div class="col-md-6 col-sx-6">
                     <div class="panel panel-default height">
                         <div class="panel-heading">Invoice</div>
                         <div class="panel-body">
                             <strong>Date:</strong><p id="today"></p>
                             <strong>Invoice No:</strong> N1234<br>
-                            <strong>Account No: {{client_id}}</strong><br>                           
+                            <strong>Account No: {{client_id}}</strong><br>
                             <strong>Due Date:</strong> Net 30<br>
-                            
+
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-3 col-lg-3">
+                <div class="col-md-6 col-sx-6">
                     <div class="panel panel-default height">
                         <div class="panel-heading">Payment Methods</div>
                         <div class="panel-body">
@@ -48,17 +38,15 @@
                             Wells Fargo<br>
                             123 Wall Street, NYC<br>
                             ABA Routing# 12234445<br>
-
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-3 col-lg-3">
-
-                    <img class="thumbnail pull-right" src="/images/design3.jpg" style="width: 100px; height: 100px;">
-
+                <div class="col-md-6 col-sx-6">
                     <div class="panel panel-default height">
+                        <div class="panel-heading">
+                            <strong>Time'nDinero PC</strong><img class="thumbnail pull-right" src="/images/design3.jpg" style="width: 100px; height: 100px;">
+                        </div>
                         <div class="panel-body">
-                            <strong>Time'nDinero PC</strong><br>
                             123 Main St. Denver, CO 80219<br>
                             303-555-000<br>
                             billing@timeNDinero.com<br />
@@ -89,7 +77,6 @@
                             </thead>
                             <tbody>
 
-
                                 {{#if projects}}
                                 {{#each projects}}
                                 <tr>
@@ -102,7 +89,6 @@
                                 {{else}}
                                 <p>No Projects To Invoice.</p>
                                 {{/if}}
-
 
                                 <tr>
                                     <td class="highrow"></td>
@@ -130,7 +116,6 @@
         </div>
     </div>
 </div>
-
 <style>
     .height {
         min-height: 200px;
@@ -158,4 +143,4 @@
         border-top: 3px solid;
     }
 </style>
-
+{{> footer}}

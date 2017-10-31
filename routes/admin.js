@@ -65,9 +65,6 @@ router.delete('/delete/:idOfrecord', (req, res) => {
 //display list of tasks of a client
 router.get('/:client_id', function (req, res, next) {
     connection.query('SELECT projects.*, clients.* FROM projects INNER JOIN clients ON projects.client_id = clients.client_id WHERE projects.client_id = ?', req.params.client_id, (err, rows, fields) => {
-
-        console.log("-------------------------");
-        console.log(rows);
         if (err) throw err;
         //change date format for presenation
         rows.forEach((e) => {
