@@ -76,21 +76,9 @@ app.get('/test', (req, res) => {
         format: 'pdf'
     }).pipe(destination);
     
-
-});
-
-app.get('/invoice', (req, res) => {
-    res.render('invoice/invoice');
-
-
 });
 
 
-app.get('/profile', (req, res) => {
-    res.render('company/profile');
-
-
-});
 
 
 app.listen(8080, function(){

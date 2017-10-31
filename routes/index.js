@@ -13,20 +13,14 @@ router.get('/', function(req, res, next) {
 });
 
 
-//display list of all task records
-router.get('/all', function (req, res, next) {
-    connection.query('SELECT * FROM projects ORDER BY project_title', (err, rows, fields) => {
+
+//display all clients with projects
+router.get('/api', function (req, res, next) {
+    connection.query('SELECT * FROM clients INNER JOIN projects ON clients.client_id = projects.client_id', (err, rows, fields) => {
         if (err) throw err;
-        //change date format for presenation
-        rows.forEach((e) => {
-            e.date = new Date(e.date).toISOString().slice(0, 10);
-        });
-        res.render('admin/index', {
-            'projects': rows
-        });
+        res.json(rows);
     });
 });
-
 
 
 module.exports = router;

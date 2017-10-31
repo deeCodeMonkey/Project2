@@ -12,7 +12,7 @@
     </div>
     <div class="form-group">
         <label>Date</label>
-        <input type="date" class="form-control" value="{{project.date}}" name="projectdate">
+        <input type="date" class="form-control" value="{{project.date}}" name="projectdate"> 
     </div>
     <div class="form-group">
         <label>Task</label>
@@ -34,11 +34,7 @@
         <label>Notes</label>
         <textarea class="form-control" name="notes">{{project.notes}}</textarea>
     </div>
-    <div class="form-group">
-        <label>Image</label>
-        <!--<img class="small-img" src="/images/portfolio/{{project.image}}" />-->
-        <input type="file" class="form-control" name="projectimage" value="{{project.attachments}}">
-    </div>
+
     <button type="submit" class="button">Submit</button>
 </form>
 

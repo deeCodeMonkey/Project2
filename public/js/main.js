@@ -45,4 +45,11 @@ $(document).ready(function () {
     });
 });
 
+
+//date of today for invoice
+$(document).ready(function () {
+    document.getElementById("today").innerHTML = new Date().toISOString().slice(0, 10);
+});
+
+
 //search bar
