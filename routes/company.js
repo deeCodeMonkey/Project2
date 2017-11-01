@@ -36,7 +36,44 @@ router.post('/add', upload.single('logo'), function (req, res, next) {
             console.log('Success: ' + result);
         }
     });
-    res.redirect('/');
+    res.redirect('/company/profile/' + req.body.client_id);
+});
+
+//display company info to edit
+router.get('/update/:client_id', function (req, res, next) {
+    connection.query('SELECT * FROM clients WHERE client_id =' + req.params.client_id, (err, rows, fields) => {
+        if (err) throw err;
+        res.render('company/edit', {
+            'client': rows[0]
+        });
+        console.log(rows[0]);
+    });
+});
+
+//update details for new client company
+router.post('/save', upload.single('logo'), function (req, res, next) {
+
+    var client = {
+        company_name: req.body.company_name,
+        contact_person: req.body.contact_person,
+        email_address: req.body.email_address,
+        phone: req.body.phone,
+        mailing_address: req.body.mailing_address
+        //do  not add logo to reset by default
+    };
+    //add only if logo uploaded
+    if (req.file) {
+        client.logo = req.file.filename;
+    }
+
+    var query = connection.query('UPDATE clients SET ? WHERE client_id=' + req.body.client_id, client, function (err, result) {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            console.log('Success: ' + result);
+        }
+    });
+    res.redirect('/company/profile/' + req.body.client_id);
 });
 
 
@@ -62,6 +99,19 @@ router.get('/profile/:id', function (req, res, next) {
     });
 });
 
+//search bar
+router.get('/search', function (req, res, next) {
+    var term = req.query.term;
+    console.log('Search Term = ' + term);
+    connection.query('SELECT company_name, client_id FROM clients WHERE company_name LIKE \'%' + term + '%\'', (err, rows, fields) => {
+        if (err) throw err;
+        var list = [];
+        rows.map(function (row) {
+            list.push({ value: row.client_id, label: row.company_name });
+        });
+        res.json(list);
+    });
+});
 
 
 module.exports = router;

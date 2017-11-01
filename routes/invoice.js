@@ -5,50 +5,7 @@ var connection = require('../model/connection.js');
 var phantom = require('phantom-render-stream');
 var fs = require('fs');
 var render = phantom();
-
-
-//generate actual invoice 
-router.get('/inv/:id', function (req, res, next) {
-    connection.query('SELECT * FROM projects INNER JOIN clients ON projects.client_id = clients.client_id WHERE projects.client_id =' + req.params.id, (err, rows, fields) => {
-        if (err) throw err;
-
-        var total = 0;
-        console.log(rows);
-        //sum ext_amt for every row 
-        rows.map(function (row) { total += row.ext_amt; });
-        total = currency(total);
-
-        res.render('invoice/invoicePrint', {
-            'client_id': req.params.id,
-            'projects': rows,
-            'invoice_total': total,
-            'company_name': rows[0].company_name,
-            'contact_person': rows[0].contact_person,
-            'mailing_address': rows[0].mailing_address,
-            'email_address': rows[0].email_address,
-            'phone': rows[0].phone,
-            layout: false
-        });
-    });
-
-
-
-});
-
-router.get('/pdf/:id', function (req, res, next) {
-    var destination = fs.createWriteStream('out.pdf');
-    destination.addListener('finish', () => {
-        res.sendFile(path.join(__dirname, '../out.pdf'));
-    });
-    render('http://localhost:8080/invoice/inv/' + req.params.id, {
-        orientation: 'portrait',
-        format: 'pdf',
-        zoomFactor: 1,
-        margin: '1cm',
-        width: 1000,
-    }).pipe(destination);
-
-});
+var nodemailer = require('nodemailer');
 
 
 //generate and display invoice for client
@@ -76,6 +33,94 @@ router.get('/:id', function (req, res, next) {
 });
 
 
+//generate actual invoice without GUI
+router.get('/inv/:id', function (req, res, next) {
+    connection.query('SELECT * FROM projects INNER JOIN clients ON projects.client_id = clients.client_id WHERE projects.client_id =' + req.params.id, (err, rows, fields) => {
+        if (err) throw err;
+
+        var total = 0;
+        console.log(rows);
+        //sum ext_amt for every row 
+        rows.map(function (row) { total += row.ext_amt; });
+        total = currency(total);
+
+        res.render('invoice/invoicePrint', {
+            'client_id': req.params.id,
+            'projects': rows,
+            'invoice_total': total,
+            'company_name': rows[0].company_name,
+            'contact_person': rows[0].contact_person,
+            'mailing_address': rows[0].mailing_address,
+            'email_address': rows[0].email_address,
+            'phone': rows[0].phone,
+            layout: false
+        });
+    });
+});
+
+
+//generate pdf invoice to path
+router.get('/pdf/:id', function (req, res, next) {
+    var destination = fs.createWriteStream('invoice.pdf');
+    destination.addListener('finish', () => {
+        let fp = path.join(__dirname, '../invoice.pdf');
+
+        connection.query('SELECT client_id, email_address FROM clients WHERE client_id=' +
+            req.params.id, (err, rows, fields) => {
+                sendPdf(fp, rows[0].email_address, rows[0].client_id, res);
+            });
+    });
+    render('http://localhost:8080/invoice/inv/' + req.params.id, {
+        orientation: 'portrait',
+        format: 'pdf',
+        zoomFactor: 1,
+        margin: '1cm',
+        width: 1000,
+    }).pipe(destination);
+
+});
+
+
+//email pdf invoice
+function sendPdf(pdfPath, emailAddress, client_id, res) {
+    nodemailer.createTestAccount((err, account) => {
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'testCo108@gmail.com',
+                pass: 'testco888'
+            }
+        });
+        // setup email data 
+        let mailOptions = {
+            from: " Time'nDinero <testCo108@gmail.com>", 
+            to: emailAddress, 
+            subject: "Invoice from Time'nDinero!", 
+            text: 'Please see your attached invoice. Prompt payment is appreciated. Thank you!', 
+            html: '<p>Please see your attached invoice. Prompt payment is appreciated.</p> <br/> {{{PayPal Payment Link}}} <p>Thank you!</p>', 
+            attachments: [
+                {
+                    filename: 'invoice.pdf',
+                    path: pdfPath
+                }
+            ]
+        };
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+                res.redirect('/');
+            }
+            console.log('Message Sent: ' + info.response);
+            res.redirect('/invoice/' + client_id);
+        });
+    });
+}
+
+
+
+//currency format function
 var currency = function (num) {
     var str = num.toString();
     var decIndex = str.indexOf('.');

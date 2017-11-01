@@ -1,10 +1,8 @@
-var express = require('express');
+﻿var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
-var expressValidator = require('express-validator');
 var session = require('express-session');
-var flash = require('connect-flash');
 var multer = require('multer');
 //default destination directory for multer
 var upload = multer({ dest: './public/images/logos' });
@@ -34,26 +32,6 @@ app.use(session({
     resave: true
 }));
 
-// Flash Middleware
-app.use(flash());
-
-//// Validator Middleware
-app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
-
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value
-    };
-  }
-}));
 
 // Route Files
 var routes = require('./routes/index');
@@ -75,7 +53,7 @@ app.get('/test', (req, res) => {
     render('http://localhost:8080/invoice/100', {
         format: 'pdf'
     }).pipe(destination);
-    
+
 });
 
 app.get('/test1', function (req, res) {
@@ -83,7 +61,49 @@ app.get('/test1', function (req, res) {
 });
 
 
+/*
+app.get('/pdf/send', function (req, res) {
 
-app.listen(8080, function(){
-	console.log('Server started 8080');
+    nodemailer.createTestAccount((err, account) => {
+
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'testCo108@gmail.com',
+                pass: 'testco888'
+            }
+        });
+
+        // setup email data 
+        let mailOptions = {
+            from: " Time'nDinero <testCo108@gmail.com>", 
+            to: 'testCo108@gmail.com', 
+            subject: "Invoice from Time'nDinero!", 
+            text: 'Please see your attached invoice. Prompt payment is appreciated. Thank you!', 
+            html: '<p>Please see your attach invoice. Prompt payment is appreciated. Thank you!</p>', 
+            attachments: [
+                {
+                    filename: 'invoice.pdf',
+                    path: './invoice.pdf'
+                }
+            ]
+        };
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+                res.redirect('/');
+            }
+            console.log('Message Sent: ' + info.response);
+            res.redirect('/');
+        });
+    });
+});
+*/
+
+
+app.listen(8080, function () {
+    console.log('Server started 8080');
 });

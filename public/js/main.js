@@ -1,3 +1,4 @@
+//delete project
 $(document).ready(function () {
     $('.delete-project').click(function () {
         var project_id = $(this).data('id');
@@ -14,19 +15,19 @@ $(document).ready(function () {
                     console.log(err);
                 }
             });
-        } 
+        }
     });
-});
 
-//expland table for task/project list
-$('[data-open-details]').click(function (e) {
-    e.preventDefault();
-    $(this).next().toggleClass('is-active');
-    $(this).toggleClass('is-active');
-});
 
-//delete company
-$(document).ready(function () {
+    //expland table for task/project list
+    $('[data-open-details]').click(function (e) {
+        e.preventDefault();
+        $(this).next().toggleClass('is-active');
+        $(this).toggleClass('is-active');
+    });
+
+    //delete company
+
     $('.delete-icon').click(function () {
         var id = $(this).data('id');
         console.log('this is from jquery' + id);
@@ -41,15 +42,56 @@ $(document).ready(function () {
                     console.log(err);
                 }
             });
-        } 
+        }
     });
+
+
+
+    //date of today for invoice
+    $('#today').html(new Date().toISOString().slice(0, 10));
+
+    //email pdf invoice
+    $('#pdfSender').click(function () {
+        //to prevent from clicking more than once
+        $('#pdfSender').attr("disabled", "disabled");
+        $('#emailModal').modal();
+        console.log($('#pdfSender').attr('data-id'));
+        window.location = '/invoice/pdf/' + $('#pdfSender').attr('data-id');
+    });
+
+
+
+    //search bar
+    var cache = {};
+    $("#search").autocomplete({
+        minLength: 1,
+        delay: 300,
+        source: function (request, response) {
+            var term = request.term;
+            if (term in cache) {
+                response(cache[term]);
+                return cache[term];
+            }
+
+            $.getJSON("/company/search",
+                request,
+                function (data, status, xhr) {
+                    cache[term] = data;
+                    response(data);
+                    return cache[term];
+                });
+        },
+        select: function (event, ui) {
+            window.location = '/company/profile/' + ui.item.value;
+            return false;
+        }
+    });
+
+
+
+
+
 });
 
 
-//date of today for invoice
-$(document).ready(function () {
-    document.getElementById("today").innerHTML = new Date().toISOString().slice(0, 10);
-});
 
-
-//search bar

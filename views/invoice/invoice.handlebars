@@ -1,4 +1,22 @@
-﻿
+﻿<div id="emailModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Invoice Emailed!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Please wait while your invoice is being prepared and emailed to {{email_address}}.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container" style="color: black">
     <div class="row">
         <div class="col-xs-12">
@@ -6,9 +24,11 @@
             <div class="row">
        
                 <a href="/admin/{{client_id}}" ><i class="fa fa-chevron-left icon pull-left" style="color: #2199e8; font-size: 24px;"></i></a>  
-                <div class="col-xs-12 col-md-3 col-lg-3 pull-right">
-                    <i class="fa fa-envelope-o icon pull-right" style="color: #2199e8; font-size: 26px;"></i>
-                    <i class="fa fa-mail-forward icon pull-right" style="color: #2199e8; font-size: 26px;"></i>
+                <div class="col-xs-12 col-md-3 col-lg-3 pull-right" >
+                    <a id="pdfSender" data-id="{{client_id}}">
+                        <i class="fa fa-envelope-o icon pull-right" style="color: #2199e8; font-size: 26px;"></i>
+                        <i class="fa fa-mail-forward icon pull-right" style="color: #2199e8; font-size: 26px;"></i>
+                    </a>
                 </div>
             </div>
             <hr>
@@ -32,8 +52,8 @@
                         <div class="panel-heading">Invoice</div>
                         <div class="panel-body">
                             <strong>Date:</strong><p id="today"></p>
-                            <strong>Invoice No:</strong> N1234<br>
-                            <strong>Account No: {{client_id}}</strong><br>                           
+                            <strong>Account No: {{client_id}}</strong><br> 
+                            <strong>Invoice No:</strong> N1234<br>                                                  
                             <strong>Due Date:</strong> Net 30<br>
                             
                         </div>

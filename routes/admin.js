@@ -10,7 +10,7 @@ router.get('/edit/:project_id', function (req, res, next) {
     //id= looking for specific project
     connection.query('SELECT * FROM projects WHERE project_id = ?', req.params.project_id, (err, rows, fields) => {
         if (err) throw err;
-        
+
         var data = rows[0];
         //data.date = new Date(data.date).toISOString().slice(0, 10);
 
@@ -64,20 +64,21 @@ router.delete('/delete/:idOfrecord', (req, res) => {
 
 //display list of tasks of a client
 router.get('/:client_id', function (req, res, next) {
-    connection.query('SELECT projects.*, clients.* FROM projects INNER JOIN clients ON projects.client_id = clients.client_id WHERE projects.client_id = ?', req.params.client_id, (err, rows, fields) => {
+    /*connection.query('SELECT projects.*, clients.* FROM projects INNER JOIN clients ON projects.client_id = clients.client_id WHERE projects.client_id = ?', req.params.client_id, (err, rows, fields) => {*/
+
+    connection.query('SELECT * FROM projects WHERE client_id = ? ORDER BY project_title', req.params.client_id, (err, rows, fields) => {
         if (err) throw err;
         //change date format for presenation
         rows.forEach((e) => {
             e.date = new Date(e.date).toISOString().slice(0, 10);
         });
-        
 
         res.render('admin/index', {
             'client_id': req.params.client_id,
             'projects': rows,
-            'company_name': rows[0].company_name
+            //'company_name': rows[0].company_name
         });
-        
+
     });
 });
 

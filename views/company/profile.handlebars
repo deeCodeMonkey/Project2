@@ -12,7 +12,7 @@
                 </a>
             </li>
             <li class="tabs-title">
-                <a href="#panel2c">
+                <a href="/company/update/{{clients.client_id}}" data-id="{{clients.client_id}}">
                     <i class="fa fa-edit"></i>
                     Edit Client
                 </a>
@@ -29,7 +29,7 @@
     <div class="tabs-content">
 
         <div class="tabs-panel is-active" style="padding-left: 10px;">
-            <img src="/images/logos/{{clients.logo}}" style="width: 500px; height: 100%;">
+            <a href="/admin/{{clients.client_id}}"><img src="/images/logos/{{clients.logo}}" style="width: 350px; height: 350px;"></a>
             <div class="card-section" style="padding-top: 20px;">
                 <h4>Billing Information:</h4>
                 <p><strong>Account No:</strong> {{clients.client_id}}</p>

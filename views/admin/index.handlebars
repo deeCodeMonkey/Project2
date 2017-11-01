@@ -1,11 +1,14 @@
 <!--/admin view is this index file-->
-{{#if projects}}
-<div>
-            <a href="/company/profile/{{client_id}}"><h5 style="color: #2199e8;">{{company_name}}</h5></a> 
-            <br />
-            <a href="/admin/add/{{client_id}}" class="button primary hollow"><i class="fi-plus"></i></a>
-            <a href="/invoice/{{client_id}}" class="button primary hollow float-right"><i class="fa fa-file-text icon pull-right"> Invoice</i></a>
 
+
+<div>
+    <a href="/company/profile/{{client_id}}"><h5 style="color: #2199e8;">Client No. {{client_id}}</h5></a>
+</div>
+<br />
+<div>
+    {{#if projects}}
+    <a href="/admin/add/{{client_id}}" class="button primary hollow"><i class="fi-plus"></i></a>
+    <a href="/invoice/{{client_id}}" class="button primary hollow float-right"><i class="fa fa-file-text icon pull-right"> Invoice</i></a>
     <table class="table-expand">
         <thead>
             <tr class="table-expand-row">
@@ -32,7 +35,6 @@
                 <td class="text-right">${{rate}}</td>
                 <td class="text-right">${{ext_amt}}</td>
                 <td><span class="expand-icon"></span></td>
-
             </tr>
             <tr class="table-expand-row-content">
                 <td colspan="9" class="table-expand-row-nested">
@@ -46,17 +48,13 @@
         {{/each}}
     </table>
 
-
     {{else}}
-    <a href="/"><i class="fa fa-chevron-left icon pull-left" style="color: #2199e8"> Go Back</i></a>
+    <a href="/company/profile/{{client_id}}"><i class="fa fa-chevron-left icon pull-left" style="color: #2199e8"> Go Back</i></a>
     <br />
     <br />
     <h5 style="color: darkslategray">No projects were entered for this client.</h5>
     <br />
     <a href="/admin/add/{{client_id}}" class="button primary hollow"><i class="fi-plus"></i></a>
-
     {{/if}}
 </div>
-
-
 
