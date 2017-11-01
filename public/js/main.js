@@ -26,13 +26,12 @@ $(document).ready(function () {
         $(this).toggleClass('is-active');
     });
 
-    //delete company
-
-    $('.delete-icon').click(function () {
-        var id = $(this).data('id');
-        console.log('this is from jquery' + id);
+    
+    //delete company per modal
+    $('.delete-company').click(function () {
+        var id = $(this).val();
+        console.log('this is jquery ' + id);
         var url = '/company/delete/' + id;
-        if (confirm('Delete Client')) {
             $.ajax({
                 url: url,
                 type: 'DELETE',
@@ -42,9 +41,7 @@ $(document).ready(function () {
                     console.log(err);
                 }
             });
-        }
     });
-
 
 
     //date of today for invoice

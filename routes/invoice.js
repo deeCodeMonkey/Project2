@@ -98,7 +98,7 @@ function sendPdf(pdfPath, emailAddress, client_id, res) {
             to: emailAddress, 
             subject: "Invoice from Time'nDinero!", 
             text: 'Please see your attached invoice. Prompt payment is appreciated. Thank you!', 
-            html: '<p>Please see your attached invoice. Prompt payment is appreciated.</p> <br/> {{{PayPal Payment Link}}} <p>Thank you!</p>', 
+            html: '<p><strong>Please see your attached invoice. Prompt payment is appreciated!</strong></p> <br/> <a href="paypal.me/payDeidra">Please click here to pay via PayPal.<a/> <br/> <p>Thank you!</p>', 
             attachments: [
                 {
                     filename: 'invoice.pdf',

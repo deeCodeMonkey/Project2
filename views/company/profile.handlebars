@@ -1,3 +1,26 @@
+<!--Delete client modal confirmation-->
+<div id="delete-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please Confirm To Delete Client <strong>{{clients.company_name}}</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><strong style="color: red;">WARNING:</strong> All projects related to <strong>{{clients.company_name}}</strong> will also be deleted.</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete-company" value="{{clients.client_id}}">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 {{#if clients}}
 
 <div class="card card-tabs float-center" style="color: black; width: 600px; height: 1000px; font-family: 'Raleway', sans-serif;">
@@ -7,7 +30,7 @@
         <ul class="tabs menu align-right">
             <!-- note: these need to be in reverse order because of the align-right setting in .menu -->
             <li class="tabs-title">              
-                <a href="/company/delete/{{clients.client_id}}" data-id="{{clients.client_id}}" class="delete-icon">
+                <a data-toggle="modal" data-target="#delete-modal">
                     <i class="fa fa-trash"></i> Delete Client
                 </a>
             </li>
