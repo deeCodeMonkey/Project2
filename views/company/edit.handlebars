@@ -27,7 +27,8 @@ enctype="multipart/form-data">
         </div>
         <div class="form-group">
             <label>Phone</label>
-            <input type="text" class="form-control" name="phone" placeholder="Phone Number" value="{{client.phone}}">
+            <input type="tel" class="form-control" name="phone" placeholder="Phone Number" value="{{client.phone}}" required
+           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
         </div>
         <div class="form-group">
             <label>Mailing Address</label>

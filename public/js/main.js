@@ -1,23 +1,22 @@
-//delete project
+
 $(document).ready(function () {
-    $('.delete-project').click(function () {
-        var project_id = $(this).data('id');
-        var client_id = $(this).data('name');
+
+    //delete project per modal
+    $('#delete-project-btn').click(function () {
+        var project_id = $(this).attr('data-project-id');
+        var client_id = $(this).attr('data-client-id');
         console.log('this is from jquery' + project_id);
         var url = '/admin/delete/' + project_id;
-        if (confirm('Delete Project')) {
-            $.ajax({
-                url: url,
-                type: 'DELETE',
-                success: function (result) {
-                    window.location = '/admin/' + client_id;
-                }, error: function (err) {
-                    console.log(err);
-                }
-            });
-        }
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            success: function (result) {
+                window.location = '/admin/' + client_id;
+            }, error: function (err) {
+                console.log(err);
+            }
+        });
     });
-
 
     //expland table for task/project list
     $('[data-open-details]').click(function (e) {
@@ -26,21 +25,21 @@ $(document).ready(function () {
         $(this).toggleClass('is-active');
     });
 
-    
+
     //delete company per modal
-    $('.delete-company').click(function () {
+    $('#delete-company').click(function () {
         var id = $(this).val();
         console.log('this is jquery ' + id);
         var url = '/company/delete/' + id;
-            $.ajax({
-                url: url,
-                type: 'DELETE',
-                success: function (result) {
-                    window.location = '/';
-                }, error: function (err) {
-                    console.log(err);
-                }
-            });
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            success: function (result) {
+                window.location = '/';
+            }, error: function (err) {
+                console.log(err);
+            }
+        });
     });
 
 
@@ -85,8 +84,28 @@ $(document).ready(function () {
     });
 
 
+    //create click event for edit, displays data for editing
+    $('.edit-project').click(function () {
+        $('#edit-form-id').val($(this).data('id'));
+        $('#edit-form-client-id').val($(this).data('client-id'));
+        $('#edit-form-date').val($(this).data('date'));
+        $('#edit-form-title').val($(this).data('title'));
+        $('#edit-form-task').val($(this).data('task'));
+        $('#edit-form-hours').val($(this).data('hours'));
+        $('#edit-form-rate').val($(this).data('rate'));
+        $('#edit-form-description').val($(this).data('description'));
+        $('#edit-form-notes').val($(this).data('notes'));
+    });
 
+    //default to today's date on 'add' form
+    $('#newProjectDate').val(new Date(new Date().toLocaleDateString()).toISOString().slice(0, 10));
 
+    //create click event for delete, reference variables specific to project
+    $('.delete-project').click(function () {
+        $('#delete-project-btn').attr('data-project-id', $(this).data('id'));
+        $('#delete-project-name').text($(this).data('title'));
+        $('#delete-task').text($(this).data('task'));
+    });
 
 });
 

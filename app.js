@@ -44,64 +44,6 @@ app.use('/company', company);
 app.use('/invoice', invoice);
 
 
-//create pdf from route
-app.get('/test', (req, res) => {
-    var destination = fs.createWriteStream('out.pdf');
-    destination.addListener('finish', () => {
-        res.sendFile('./out.pdf');
-    });
-    render('http://localhost:8080/invoice/100', {
-        format: 'pdf'
-    }).pipe(destination);
-
-});
-
-app.get('/test1', function (req, res) {
-    res.render('invoice', { layout: false });
-});
-
-
-/*
-app.get('/pdf/send', function (req, res) {
-
-    nodemailer.createTestAccount((err, account) => {
-
-        // create reusable transporter object using the default SMTP transport
-        let transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                user: 'testCo108@gmail.com',
-                pass: 'testco888'
-            }
-        });
-
-        // setup email data 
-        let mailOptions = {
-            from: " Time'nDinero <testCo108@gmail.com>", 
-            to: 'testCo108@gmail.com', 
-            subject: "Invoice from Time'nDinero!", 
-            text: 'Please see your attached invoice. Prompt payment is appreciated. Thank you!', 
-            html: '<p>Please see your attach invoice. Prompt payment is appreciated. Thank you!</p>', 
-            attachments: [
-                {
-                    filename: 'invoice.pdf',
-                    path: './invoice.pdf'
-                }
-            ]
-        };
-
-        // send mail with defined transport object
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log(error);
-                res.redirect('/');
-            }
-            console.log('Message Sent: ' + info.response);
-            res.redirect('/');
-        });
-    });
-});
-*/
 
 
 app.listen(8080, function () {

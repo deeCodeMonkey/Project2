@@ -10,12 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "*",
-    "connect-flash": "*",
     "express": "*",
     "express-handlebars": "*",
     "express-session": "*",
-    "express-validator": "^4.2.1",
-    "moment": "*",
     "multer": "*",
     "mysql": "^2.15.0",
     "nodemailer": "^4.3.1",

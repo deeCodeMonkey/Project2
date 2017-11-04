@@ -1,3 +1,25 @@
+<!--Delete project task per modal confirmation-->
+<div id="deleteProject-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Are You Sure You Want To Delete This Project Task?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><strong style="color: red;">WARNING: </strong>Project task cannot be recovered after deletion.</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="delete-project" data-project-id="{{project.project_id}}" data-client-id="{{project.client_id}}">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <a href="/admin/{{project.client_id}}"><i class="fa fa-chevron-left icon pull-left" style="color: #2199e8; font-size: 24px;"></i></a>
 <br />
 <br />
@@ -22,7 +44,7 @@
     </div>
     <div class="form-group">
         <label>Description</label>
-        <textarea class="form-control" name="description">{{project.description}}</textarea>
+        <textarea class="form-control" name="description" placeholder="Description">{{project.description}}</textarea>
     </div>
     <div class="form-group">
         <label>Hours</label>
@@ -34,11 +56,11 @@
     </div>
     <div class="form-group">
         <label>Notes</label>
-        <textarea class="form-control" name="notes">{{project.notes}}</textarea>
+        <textarea class="form-control" name="Notes">{{project.notes}}</textarea>
     </div>
     <button type="submit" class="button hollow"><strong>Submit Edit</strong></button>
 </form>
 
 <td>
-    <a href="/admin/delete/{{project.project_id}}" data-id="{{project.project_id}}" data-name="{{project.client_id}}" class="button alert hollow delete-project">Delete</a>
+    <a data-toggle="modal" data-target="#deleteProject-modal" class="button alert hollow delete-project">Delete</a>
 </td>

@@ -95,7 +95,7 @@ function sendPdf(pdfPath, emailAddress, client_id, res) {
         // setup email data 
         let mailOptions = {
             from: " Time'nDinero <testCo108@gmail.com>", 
-            to: emailAddress, 
+            to: 'emailAddress, testCo108@gmail.com',
             subject: "Invoice from Time'nDinero!", 
             text: 'Please see your attached invoice. Prompt payment is appreciated. Thank you!', 
             html: '<p><strong>Please see your attached invoice. Prompt payment is appreciated!</strong></p> <br/> <a href="paypal.me/payDeidra">Please click here to pay via PayPal.<a/> <br/> <p>Thank you!</p>', 
