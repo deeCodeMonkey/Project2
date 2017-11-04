@@ -10,7 +10,7 @@ var nodemailer = require('nodemailer');
 
 //generate and display invoice for client
 router.get('/:id', function (req, res, next) {
-    connection.query('SELECT * FROM projects INNER JOIN clients ON projects.client_id = clients.client_id WHERE projects.client_id =' + req.params.id, (err, rows, fields) => {
+    connection.query('SELECT * FROM projects INNER JOIN clients ON projects.client_id = clients.client_id WHERE projects.client_id = ? ORDER BY project_title', req.params.id, (err, rows, fields) => {
         if (err) throw err;
 
         var total = 0;
@@ -35,7 +35,7 @@ router.get('/:id', function (req, res, next) {
 
 //generate actual invoice without GUI
 router.get('/inv/:id', function (req, res, next) {
-    connection.query('SELECT * FROM projects INNER JOIN clients ON projects.client_id = clients.client_id WHERE projects.client_id =' + req.params.id, (err, rows, fields) => {
+    connection.query('SELECT * FROM projects INNER JOIN clients ON projects.client_id = clients.client_id WHERE projects.client_id = ? ORDER BY project_title', req.params.id, (err, rows, fields) => {
         if (err) throw err;
 
         var total = 0;
@@ -65,9 +65,9 @@ router.get('/pdf/:id', function (req, res, next) {
     destination.addListener('finish', () => {
         let fp = path.join(__dirname, '../invoice.pdf');
 
-        connection.query('SELECT client_id, email_address FROM clients WHERE client_id=' +
+        connection.query('SELECT * FROM clients WHERE client_id=' +
             req.params.id, (err, rows, fields) => {
-                sendPdf(fp, rows[0].email_address, rows[0].client_id, res);
+                sendPdf(fp, rows[0].email_address, rows[0].company_name, rows[0].contact_person, rows[0].client_id, res);
             });
     });
     render('http://localhost:8080/invoice/inv/' + req.params.id, {
@@ -82,7 +82,7 @@ router.get('/pdf/:id', function (req, res, next) {
 
 
 //email pdf invoice
-function sendPdf(pdfPath, emailAddress, client_id, res) {
+function sendPdf(pdfPath, emailAddress, companyName, contactPerson, client_id, res) {
     nodemailer.createTestAccount((err, account) => {
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
@@ -95,10 +95,10 @@ function sendPdf(pdfPath, emailAddress, client_id, res) {
         // setup email data 
         let mailOptions = {
             from: " Time'nDinero <testCo108@gmail.com>", 
-            to: 'emailAddress, testCo108@gmail.com',
-            subject: "Invoice from Time'nDinero!", 
-            text: 'Please see your attached invoice. Prompt payment is appreciated. Thank you!', 
-            html: '<p><strong>Please see your attached invoice. Prompt payment is appreciated!</strong></p> <br/> <a href="paypal.me/payDeidra">Please click here to pay via PayPal.<a/> <br/> <p>Thank you!</p>', 
+            to: emailAddress + ', testCo108@gmail.com',
+            subject: "Invoice for " + companyName, 
+            text: 'Please see your attached invoice. Prompt payment is appreciated. Thank you!',
+            html: '<p><strong>Dear ' + contactPerson + ',<br/><br/> Please see your attached invoice. Prompt payment is appreciated!</strong></p> <br /> <a href="paypal.me/payDeidra">Please click here to pay via PayPal.<a /> <br /> <p>Thank you!</p>', 
             attachments: [
                 {
                     filename: 'invoice.pdf',

@@ -2,7 +2,6 @@
 var path = require('path');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
-var session = require('express-session');
 var multer = require('multer');
 //default destination directory for multer
 var upload = multer({ dest: './public/images/logos' });
@@ -12,7 +11,7 @@ var fs = require('fs');
 var render = phantom();
 
 var app = express();
-
+var PORT = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -23,14 +22,6 @@ app.set('view engine', 'handlebars');
 //Middleware, body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-
-//Middleware, handle sessions
-app.use(session({
-    secret: 'secret',
-    saveUninitialized: true,
-    resave: true
-}));
 
 
 // Route Files
@@ -46,6 +37,6 @@ app.use('/invoice', invoice);
 
 
 
-app.listen(8080, function () {
+app.listen(PORT, function () {
     console.log('Server started 8080');
 });

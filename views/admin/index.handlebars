@@ -36,7 +36,7 @@
                 <td style="white-space: nowrap;"><span class="expand-icon" style="color:#2199e8;">
                       </span>&nbsp;&nbsp;&nbsp;</td>
                 <td><span class="glyphicon glyphicon-edit edit-project" style="color:#2199e8;" aria-hidden="true" data-toggle="modal"
-                  data-target="#editModal" data-id="{{project_id}}" data-client-id="{{client_id}}" data-date="{{date}}" data-title="{{project_title}}" data-task="{{task}}" data-description="{{description}}" data-hours="{{hours}}" data-rate="{{rate}}"></span>&nbsp;&nbsp;&nbsp;
+                  data-target="#editModal" data-id="{{project_id}}" data-client-id="{{client_id}}" data-date="{{date}}" data-title="{{project_title}}" data-task="{{task}}" data-description="{{description}}" data-hours="{{hours}}" data-rate="{{rate}}" data-notes="{{notes}}"></span>&nbsp;&nbsp;&nbsp;
                 <span data-toggle="modal" data-target="#deleteProject-modal" class="glyphicon glyphicon-remove-circle delete-project" data-id="{{project_id}}" data-title="{{project_title}}" data-task="{{task}}"> </span>
                 </td>
             </tr>
@@ -155,7 +155,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="description"  id="edit-form-description" ></textarea>
+                        <input type="text" class="form-control" name="description" id="edit-form-description"/>
                     </div>
                     <div class="form-group">
                         <label>Notes</label>
@@ -177,7 +177,7 @@
 <div id="deleteProject-modal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" >
                 <h5 class="modal-title">Are you sure you want to <br/>delete task &quot;<span id="delete-task"></span>&quot; of project &quot;<span id="delete-project-name"></span>&quot; ?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
